@@ -6,7 +6,7 @@ const title = lines.shift() || '我的文字网站';
 const paragraphs = lines.join('\n').trim().split(/\n\s*\n/).filter(Boolean);
 const out = new URL('./public/', import.meta.url);
 await mkdir(out, { recursive: true });
-for (const filename of ['9-2.txt', '9-3.txt', '10-1.txt', '10-2.txt', 'HK.txt']) {
+for (const filename of ['9-2.txt', '9-3.txt', '10-1.txt', '10-2.txt', '10-3.txt', 'HK.txt']) {
   await copyFile(new URL('./' + filename, import.meta.url), new URL(filename, out));
 }
 await writeFile(new URL('content.txt', out), content);
