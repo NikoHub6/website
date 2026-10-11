@@ -1,4 +1,4 @@
-import { readFile, mkdir, writeFile } from 'node:fs/promises';
+import { readFile, mkdir, writeFile, copyFile } from 'node:fs/promises';
 const content = await readFile(new URL('./content.txt', import.meta.url), 'utf8');
 const escape = s => s.replaceAll('&', '&amp;').replaceAll('<', '&lt;').replaceAll('>', '&gt;').replaceAll('"', '&quot;');
 const lines = content.trim().split(/\r?\n/);
@@ -6,6 +6,9 @@ const title = lines.shift() || '我的文字网站';
 const paragraphs = lines.join('\n').trim().split(/\n\s*\n/).filter(Boolean);
 const out = new URL('./public/', import.meta.url);
 await mkdir(out, { recursive: true });
+for (const filename of ['9-2.txt', '9-3.txt', '10-1.txt', '10-2.txt', 'HK.txt']) {
+  await copyFile(new URL('./' + filename, import.meta.url), new URL(filename, out));
+}
 await writeFile(new URL('content.txt', out), content);
 await writeFile(new URL('index.html', out), `<!doctype html>
 <html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>${escape(title)}</title>
