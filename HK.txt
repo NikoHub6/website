@@ -1,4 +1,7 @@
 
+# Clash Meta / Mihomo
+# 4 个 IEPL Shadowsocks 节点
+
 mixed-port: 7890
 allow-lan: false
 mode: rule
@@ -6,62 +9,53 @@ log-level: warning
 ipv6: false
 
 proxies:
+
   - name: "🇭🇰 香港实验性 IEPL 专线 1"
     type: ss
-    server: 6ed68gz8-2ad3.aws-agent.com
-    port: 10014
+    server: 7d0a2gz8-7a0c.aws-agent.net
+    port: 10011
     cipher: aes-128-gcm
     password: "Sj10bnYDe7w6V29E"
     plugin: obfs
     plugin-opts:
       mode: http
-      host: 925f52d733.m.ctrip.com
+      host: 1abf077646.m.ctrip.com
 
   - name: "🇯🇵 日本实验性 IEPL 专线 1"
     type: ss
-    server: fc513sh2-6ed6.aws-agent.com
-    port: 10024
+    server: 63182sh7-4d7b.aws-agent.net
+    port: 10021
     cipher: aes-128-gcm
     password: "Sj10bnYDe7w6V29E"
     plugin: obfs
     plugin-opts:
       mode: http
-      host: 925f52d733.m.ctrip.com
+      host: 1abf077646.m.ctrip.com
 
   - name: "🇸🇬 新加坡实验性 IEPL 专线 1"
     type: ss
-    server: 6ed68gz8-2ad3.aws-agent.com
-    port: 10034
+    server: 7d0a2gz8-7a0c.aws-agent.net
+    port: 10031
     cipher: aes-128-gcm
     password: "Sj10bnYDe7w6V29E"
     plugin: obfs
     plugin-opts:
       mode: http
-      host: 925f52d733.m.ctrip.com
+      host: 1abf077646.m.ctrip.com
 
   - name: "🇺🇸 美国实验性 IEPL 专线 1"
     type: ss
-    server: fc513sh2-6ed6.aws-agent.com
-    port: 10054
+    server: 63182sh7-4d7b.aws-agent.net
+    port: 10051
     cipher: aes-128-gcm
     password: "Sj10bnYDe7w6V29E"
     plugin: obfs
     plugin-opts:
       mode: http
-      host: 925f52d733.m.ctrip.com
-
-proxy-providers:
-  additional_subscription:
-    type: http
-    url: "https://website-2sw.pages.dev/10-2.txt"
-    path: ./proxy_providers/additional_subscription.yaml
-    interval: 21600
-    health-check:
-      enable: true
-      url: https://www.gstatic.com/generate_204
-      interval: 300
+      host: 1abf077646.m.ctrip.com
 
 proxy-groups:
+
   - name: "🚀 节点选择"
     type: select
     proxies:
@@ -71,8 +65,6 @@ proxy-groups:
       - "🇸🇬 新加坡实验性 IEPL 专线 1"
       - "🇺🇸 美国实验性 IEPL 专线 1"
       - DIRECT
-    use:
-      - additional_subscription
 
   - name: "♻️ 自动选择"
     type: url-test
@@ -81,10 +73,9 @@ proxy-groups:
       - "🇯🇵 日本实验性 IEPL 专线 1"
       - "🇸🇬 新加坡实验性 IEPL 专线 1"
       - "🇺🇸 美国实验性 IEPL 专线 1"
-    use:
-      - additional_subscription
-    url: https://www.gstatic.com/generate_204
+    url: "https://www.gstatic.com/generate_204"
     interval: 300
+    tolerance: 50
 
 rules:
   - GEOIP,CN,DIRECT
